@@ -3,6 +3,7 @@
 const myDataFileUrl = "../../opgavefiler/data/story.json";
 const myStoryElement = document.getElementById("theStory");
 
+
 fetch(myDataFileUrl)
 
 .then((response) => {
@@ -10,7 +11,12 @@ fetch(myDataFileUrl)
 })
 
  .then((data) => {
-    console.log(data);
+    // console.log(data);
+    myStoryElement.innerHTML = data.DK.text;
+
+    const myImgUrl = document.createElement("img");
+    myImgUrl.src = "../../opgavefiler/img/cat.jpg";
+    myStoryElement.appendChild(myImgUrl);
  })
 
  .catch((error) => {
@@ -21,10 +27,44 @@ fetch(myDataFileUrl)
 
 
 /* Opgave 2 - skriv videre på koden her: */
-// const myDataFileUrl = "../../opgavefiler/data/story.json";
-// const myStoryElement = document.getElementById("theStory");
+const myStoryElementTwo = document.getElementById("theStoryTwo");
 
+fetch(myDataFileUrl)
 
+.then((response) => {
+    return response.json();
+})
+
+ .then((data) => {
+    console.log(data.SE.text);
+
+    story('SE');
+ })
+
+ .catch((error) => {
+     console.error(error);
+ });
+
+function story(language) {
+    let myStory = null;
+
+    switch (language) {
+        case 'DK':
+            myStory = (myStoryElementTwo.innerHTML = data.DK.text);
+            break;
+        case 'SE':
+            myStory = (myStoryElementTwo.innerHTML = data.SE.text);
+            break;
+        case 'FI':
+            myStory = (myStoryElementTwo.innerHTML = data.FI.text);
+            break;
+        case 'UK':
+            myStory = (myStoryElementTwo.innerHTML = data.UK.text);
+            break;
+        default:
+            break;
+    }
+}
 
 
 
