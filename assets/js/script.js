@@ -11,10 +11,15 @@ async function startCountdown() {
     }
 
     countdownElement.textContent = "Færdig!";
+
+    await sleep(2000);
+
+    startCountdown();
 }
 
 function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
 }
-
 startCountdown();
