@@ -36,10 +36,10 @@ fetch(myDataFileUrl)
 })
 
  .then((data) => {
-    console.log(data.SE.text);
+    // console.log(data.SE.text);
     // myStoryElementTwo.innerHTML = data.SE.text;
-    data = storyData;
-    story('SE');
+    sameStory = data;
+    story('FI');
  })
 
  .catch((error) => {
@@ -47,8 +47,8 @@ fetch(myDataFileUrl)
  });
 
 function story(language) {
-    let myStory = null;
-    let storyData = data;
+    // let myStory = null;
+    let storyData = sameStory;
 
     switch (language) {
         case 'DK':
@@ -66,9 +66,9 @@ function story(language) {
         default:
             break;
     }
-    // if(myStoryElementTwo){
-    //     myStoryElementTwo.innerHTML = myStory;
-    // }
+     if(myStoryElementTwo){
+         myStoryElementTwo.innerHTML = myStory;
+     }
 }
 
 
@@ -94,13 +94,13 @@ fetch(userURI)
     console.error(error);
 });
 
-function buildUsers(myUserData) {
-    myUserData.map((myUser) => {
+function buildUsers(apiData) {
+    apiData.map((myUser) => {
         let myUserHTML =
         `<h2>${myUser.name}</h2>
         <p>Adresse:  ${myUser.address.street}  ${myUser.address.suite}</br>
         post nummer: ${myUser.address.zipcode}<br>
-        by: ${myUser.address.city}</p>`;
+        by: ${myUser.address.city}</p> <hr>`;
         myUserlistElement.innerHTML += myUserHTML;
     });
 }
