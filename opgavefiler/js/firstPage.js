@@ -37,7 +37,8 @@ fetch(myDataFileUrl)
 
  .then((data) => {
     console.log(data.SE.text);
-
+    // myStoryElementTwo.innerHTML = data.SE.text;
+    data = storyData;
     story('SE');
  })
 
@@ -47,23 +48,27 @@ fetch(myDataFileUrl)
 
 function story(language) {
     let myStory = null;
+    let storyData = data;
 
     switch (language) {
         case 'DK':
-            myStory = (myStoryElementTwo.innerHTML = data.DK.text);
+            myStory = storyData.DK.text;
             break;
         case 'SE':
-            myStory = (myStoryElementTwo.innerHTML = data.SE.text);
+            myStory = storyData.SE.text;
             break;
         case 'FI':
-            myStory = (myStoryElementTwo.innerHTML = data.FI.text);
+            myStory = storyData.FI.text;
             break;
         case 'UK':
-            myStory = (myStoryElementTwo.innerHTML = data.UK.text);
+            myStory = storyData.UK.text;
             break;
         default:
             break;
     }
+    // if(myStoryElementTwo){
+    //     myStoryElementTwo.innerHTML = myStory;
+    // }
 }
 
 
@@ -73,6 +78,52 @@ function story(language) {
 const userURI = "https://jsonplaceholder.typicode.com/users";
 const myUserlistElement = document.getElementById("userList");
 
+fetch(userURI)
+
+.then((response) => {
+    return response.json();
+})
+
+.then((data) => {
+    // console.log(data);
+
+    buildUsers(data);
+})
+
+.catch((error) => {
+    console.error(error);
+});
+
+function buildUsers(myUserData) {
+    myUserData.map((myUser) => {
+        let myUserHTML =
+        `<h2>${myUser.name}</h2>
+        <p>Adresse:  ${myUser.address.street}  ${myUser.address.suite}</br>
+        post nummer: ${myUser.address.zipcode}<br>
+        by: ${myUser.address.city}</p>`;
+        myUserlistElement.innerHTML += myUserHTML;
+    });
+}
 
 /* Opgave 4*/
 // din kode her
+const apiDogURL = "https://dog.ceo/api/breeds/image/random";
+const myDogs = document.getElementById("theDog");
+
+fetch(apiDogURL)
+
+.then((response) => {
+    return response.json();
+})
+
+.then((data) => {
+    // console.log(data);
+    
+    const notMyDog = document.createElement("img");
+    notMyDog.src = data.message;
+    myDogs.appendChild(notMyDog);
+ })
+ 
+.catch((error) => {
+    console.error(error);
+});
